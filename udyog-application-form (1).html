@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>উদ্যোগ (UDYOG) - আবেদন ফরম</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --green:#14402f; --line:#222; --shade:#f1f1f1; }
+  * { box-sizing:border-box; }
+  body { font-family:'Noto Sans Bengali','Kalpurush','SolaimanLipi',Arial,sans-serif; color:#111; margin:0; background:#e9ecea; font-size:14px; line-height:1.5; }
+  .page { max-width:860px; margin:16px auto; background:#fff; padding:24px 28px; box-shadow:0 1px 6px rgba(0,0,0,.2); }
+  header { border-bottom:3px solid var(--green); padding-bottom:8px; margin-bottom:10px; }
+  header h1 { margin:0; font-size:24px; color:var(--green); }
+  header h2 { margin:0; font-size:16px; color:var(--green); }
+  header p { margin:2px 0 0; }
+  .title { text-align:center; font-size:20px; font-weight:700; text-decoration:underline; margin:14px 0 2px; }
+  .note { text-align:center; font-size:12.5px; margin-bottom:12px; }
+  .bar { background:var(--green); color:#fff; text-align:center; padding:5px 8px; font-weight:600; margin:18px 0 8px; }
+  table { width:100%; border-collapse:collapse; margin-bottom:8px; }
+  th, td { border:1px solid var(--line); padding:5px 7px; vertical-align:middle; text-align:left; }
+  th { background:var(--shade); text-align:center; }
+  td.n { width:44px; text-align:center; font-weight:600; }
+  td.l { width:34%; }
+  tr.s td.l, tr.s td.n { background:var(--shade); }
+  input[type=text], input[type=email], input[type=tel], input[type=date], input[type=number], textarea, select {
+    width:100%; border:0; border-bottom:1px dotted #777; background:transparent; font:inherit; padding:3px 2px; outline:none; }
+  input:focus, textarea:focus { background:#fffbe0; }
+  textarea { resize:vertical; border:1px dotted #777; min-height:70px; }
+  textarea.tall { min-height:190px; }
+  .boxes { display:flex; }
+  .boxes input { width:34px; text-align:center; border:1px solid var(--line); padding:5px 0; }
+  .boxes input.pre { background:var(--shade); }
+  .photo { width:170px; text-align:center; font-size:12.5px; }
+  .photo div { height:130px; border:1px dashed #666; display:flex; align-items:center; justify-content:center; color:#666; margin-top:4px; }
+  .trio { display:flex; gap:6px; align-items:center; }
+  .trio span { white-space:nowrap; font-size:12.5px; }
+  .inline { display:inline-block; width:70px; }
+  h3 { margin:14px 0 6px; font-size:15px; }
+  .decl p { text-align:justify; margin:6px 0; }
+  .sign { margin-top:24px; display:flex; gap:8px; align-items:center; }
+  .sign input { flex:1; }
+  ul { margin:4px 0; }
+  .total td { font-weight:700; text-align:center; }
+  .num { text-align:right; }
+  .toolbar { max-width:860px; margin:12px auto 0; text-align:right; }
+  .toolbar button { background:var(--green); color:#fff; border:0; padding:8px 18px; border-radius:4px; font:inherit; cursor:pointer; }
+  footer { text-align:center; font-size:11.5px; color:#666; margin-top:14px; border-top:1px solid #ccc; padding-top:6px; }
+  @media (max-width:640px){ .page{padding:14px 10px;} th,td{padding:4px;} td.l{width:38%;} .boxes input{width:26px;} .addr th, .addr td{font-size:12px;} }
+  @media print {
+    body { background:#fff; }
+    .page { box-shadow:none; margin:0; padding:10px 0; max-width:none; page-break-after:always; }
+    .toolbar { display:none; }
+    input, textarea { border-color:#999; }
+    .bar, th, tr.s td, .photo div { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+
+  /* ---------- ঐচ্ছিক সহযোগিতা (হার্ট আইকন) ---------- */
+  .heart-fab { position:fixed; right:16px; bottom:16px; width:48px; height:48px; border-radius:50%; border:0; background:#fff; color:#c2185b; font-size:24px; line-height:1; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,.28); z-index:40; display:flex; align-items:center; justify-content:center; transition:transform .15s; }
+  .heart-fab:hover { transform:scale(1.1); }
+  .heart-fab::after { content:attr(data-tip); position:absolute; right:56px; background:#222; color:#fff; font-size:12px; padding:4px 9px; border-radius:6px; white-space:nowrap; opacity:0; pointer-events:none; transition:opacity .15s; }
+  .heart-fab:hover::after { opacity:1; }
+  .modal-bg { position:fixed; inset:0; background:rgba(10,25,18,.6); display:none; align-items:center; justify-content:center; padding:14px; z-index:50; }
+  .modal-bg.open { display:flex; }
+  .modal { background:#fff; width:100%; max-width:440px; max-height:94vh; overflow:auto; border-radius:14px; box-shadow:0 12px 40px rgba(0,0,0,.35); }
+  .modal-head { background:linear-gradient(135deg,#14402f,#1f6b4d); color:#fff; padding:18px 20px 14px; border-radius:14px 14px 0 0; position:relative; text-align:center; }
+  .modal-head .big { font-size:34px; line-height:1; }
+  .modal-head h2 { margin:6px 0 0; font-size:18px; }
+  .modal-x { position:absolute; right:10px; top:8px; background:none; border:0; color:#fff; font-size:26px; line-height:1; cursor:pointer; padding:4px 8px; }
+  .modal-body { padding:16px 20px 20px; }
+  .modal-body p { margin:0 0 10px; text-align:center; }
+  .free { background:#e8f5ee; border:1px solid #bfe0cd; color:#14402f; border-radius:8px; padding:8px 10px; font-weight:600; font-size:13.5px; }
+  .chips { display:flex; gap:6px; justify-content:center; flex-wrap:wrap; margin:6px 0 12px; }
+  .chips span { background:#fdecf3; color:#a3144f; border:1px solid #f4c4d8; padding:3px 12px; border-radius:16px; font-size:13px; font-weight:600; }
+  .pay { display:flex; align-items:center; justify-content:space-between; gap:8px; border:1px solid #ddd; border-radius:8px; padding:8px 10px; margin-bottom:6px; }
+  .pay .nm { font-weight:700; }
+  .pay small { color:#666; display:block; font-size:11.5px; }
+  .pay .no { font-family:Arial,sans-serif; letter-spacing:.5px; direction:ltr; }
+  .copy { background:#eef2ef; border:1px solid #cdd6d0; border-radius:5px; padding:4px 10px; font:inherit; font-size:12px; cursor:pointer; }
+  .thanks { text-align:center; color:#555; font-size:13px; margin-top:12px; }
+  @media print { .heart-fab, .modal-bg { display:none !important; } }
+</style>
+</head>
+<body>
+
+<div class="toolbar"><button id="pdfBtn" onclick="downloadPDF()">PDF ডাউনলোড করুন</button></div>
+
+<!-- ============ পৃষ্ঠা ১ ============ -->
+<div class="page">
+  <header>
+    <h1>উদ্যোগ (UDYOG)</h1>
+    <h2>উপজেলাভিত্তিক তরুণ উদ্যোক্তা অনুসন্ধান, চিহ্নিতকরণ ও অর্থায়ন কর্মসূচি</h2>
+    <p>এসএমই এন্ড স্পেশাল প্রোগ্রামস্ ডিপার্টমেন্ট, বাংলাদেশ ব্যাংক।</p>
+  </header>
+
+  <div class="title">আবেদন ফরম</div>
+  <div class="note">(আবেদন জমাদানের সর্বশেষ তারিখ ৩০ নভেম্বর ২০২৬। মানিকগঞ্জ, ফেনী, ভোলা, নওগাঁ, হবিগঞ্জ, ঝিনাইদহ, নেত্রকোণা ও রংপুর ব্যতীত)</div>
+
+  <table>
+    <tr><th colspan="2">ব্যাংক শাখায় ব্যবহারের জন্য</th><th class="photo" rowspan="1">পাসপোর্ট সাইজ ছবি (২ কপি)</th></tr>
+    <tr>
+      <td class="l">ট্র্যাকিং নম্বর:</td>
+      <td><div class="boxes"><input maxlength="1" class="pre"><input maxlength="1"><input maxlength="1" class="pre"><input maxlength="1"><input maxlength="1" class="pre"><input maxlength="1"><input maxlength="1" class="pre"><input maxlength="1"></div></td>
+      <td rowspan="6" class="photo"><div>ছবি</div></td>
+    </tr>
+    <tr><td class="l">আবেদন গ্রহণকারী ব্যাংক ও শাখা:</td><td><input type="text"></td></tr>
+    <tr>
+      <td class="l">গ্রহণের তারিখ:</td>
+      <td><div class="boxes"><input maxlength="1" class="pre"><input maxlength="1"><input maxlength="1" class="pre"><input maxlength="1"><input maxlength="1" value="২" readonly><input maxlength="1" value="০" readonly><input maxlength="1" value="২" readonly><input maxlength="1" value="৬" readonly></div></td>
+    </tr>
+    <tr><td class="l">জেলা:</td><td><input type="text"></td></tr>
+    <tr><td class="l">উপজেলা:</td><td><input type="text"></td></tr>
+    <tr><td class="l">শাখা ব্যবস্থাপকের নাম:</td><td><input type="text"></td></tr>
+    <tr><td class="l">স্বাক্ষর ও সীল:</td><td colspan="2"><textarea style="min-height:70px"></textarea></td></tr>
+  </table>
+
+  <div class="bar">পার্ট-১: ব্যক্তিগত তথ্যাবলি</div>
+  <table>
+    <tr><td class="n" rowspan="2">০১</td><td class="l" rowspan="2">আবেদনকারীর নাম</td><td style="width:110px">বাংলায়</td><td><input type="text"></td></tr>
+    <tr><td>In English<br>(Block Letters)</td><td><input type="text" style="text-transform:uppercase"></td></tr>
+    <tr class="s"><td class="n">০২</td><td class="l">পিতার নাম</td><td colspan="2"><input type="text"></td></tr>
+    <tr><td class="n">০৩</td><td class="l">মাতার নাম</td><td colspan="2"><input type="text"></td></tr>
+    <tr class="s"><td class="n">০৪</td><td class="l">জাতীয় পরিচয়পত্র নম্বর</td><td colspan="2"><input type="text" inputmode="numeric"></td></tr>
+    <tr><td class="n">০৫</td><td class="l">জন্ম তারিখ ও আবেদনের শেষ তারিখে বয়স</td><td colspan="2"><div class="trio"><input type="date"><span>বয়স:</span><input type="text" style="width:130px" placeholder="বছর / মাস / দিন"></div></td></tr>
+    <tr class="s"><td class="n">০৬</td><td class="l">বৈবাহিক অবস্থা</td><td colspan="2"><input type="text"></td></tr>
+    <tr><td class="n" rowspan="2">০৭</td><td class="l">(বিবাহিত হলে)<br>স্বামী/স্ত্রীর নাম:</td><td colspan="2"><input type="text"></td></tr>
+    <tr><td class="l">জাতীয় পরিচয়পত্র নম্বর</td><td colspan="2"><input type="text" inputmode="numeric"></td></tr>
+    <tr class="s"><td class="n">০৮</td><td class="l">শিক্ষাগত যোগ্যতা (সর্বশেষ পাসকৃত পরীক্ষা, বোর্ড/বিশ্ববিদ্যালয় ও সাল)</td><td colspan="2"><input type="text"></td></tr>
+    <tr><td class="n">০৯</td><td class="l">ফোন নম্বর / বিকল্প ফোন নম্বর</td><td colspan="2"><input type="tel"></td></tr>
+    <tr class="s"><td class="n">১০</td><td class="l">ই-মেইল আইডি</td><td colspan="2"><input type="email"></td></tr>
+  </table>
+  <footer>উদ্যোগ (UDYOG): উপজেলাভিত্তিক তরুণ উদ্যোক্তা অনুসন্ধান, চিহ্নিতকরণ ও অর্থায়ন কর্মসূচি | পৃষ্ঠা ১</footer>
+</div>
+
+<!-- ============ পৃষ্ঠা ২ ============ -->
+<div class="page">
+  <table>
+    <tr><td class="n">১১</td><td class="l">দক্ষতা উন্নয়নমূলক কোনরূপ প্রশিক্ষণ থাকলে তার বিবরণ (প্রতিষ্ঠান, কোর্সের নাম, মেয়াদ ও সাল; সনদের কপি সংযুক্ত করুন)</td><td><textarea></textarea></td></tr>
+    <tr class="s"><td class="n">১২</td><td class="l">ব্যবসা/চাকরির অভিজ্ঞতা থাকলে তার বিবরণ</td><td><textarea class="tall"></textarea></td></tr>
+    <tr><td class="n">১৩</td><td class="l">ব্যাংক হিসাব থাকলে ব্যাংক হিসাবের তথ্য</td><td style="text-align:center"><div style="font-size:12.5px;margin-bottom:4px">(ব্যাংকের নাম ও শাখা, হিসাবের ধরণ, হিসাব নম্বর)</div><textarea></textarea></td></tr>
+    <tr class="s"><td class="n">১৪</td><td class="l">কোনো ব্যাংক/আর্থিক প্রতিষ্ঠানে বিদ্যমান ঋণ আছে কিনা (হ্যাঁ/না); থাকলে বিবরণ</td><td><textarea></textarea></td></tr>
+  </table>
+
+  <h3>১৫. বর্তমান ঠিকানা (জাতীয় পরিচয়পত্র মোতাবেক)</h3>
+  <table class="addr">
+    <tr><th>বাড়ি/মহল্লার নং ও নাম</th><th>রোড নং/ এলাকা/ গ্রামের নাম</th><th>ডাকঘর ও পোস্ট কোড</th><th>থানা/উপজেলা</th><th>জেলা</th><th>বিভাগ</th></tr>
+    <tr style="height:70px"><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+  </table>
+
+  <h3>১৬. স্থায়ী ঠিকানা</h3>
+  <table class="addr">
+    <tr><th>বাড়ি/মহল্লার নং ও নাম</th><th>রোড নং/ এলাকা/ গ্রামের নাম</th><th>ডাকঘর ও পোস্ট কোড</th><th>থানা/উপজেলা</th><th>জেলা</th><th>বিভাগ</th></tr>
+    <tr style="height:70px"><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+  </table>
+  <footer>উদ্যোগ (UDYOG): উপজেলাভিত্তিক তরুণ উদ্যোক্তা অনুসন্ধান, চিহ্নিতকরণ ও অর্থায়ন কর্মসূচি | পৃষ্ঠা ২</footer>
+</div>
+
+<!-- ============ পৃষ্ঠা ৩ ============ -->
+<div class="page">
+  <div class="bar">পার্ট-২: ব্যবসায়িক পরিকল্পনা সংক্রান্ত তথ্যাদি (ইতোপূর্বে ব্যবসা না থেকে থাকলে)</div>
+  <table>
+    <tr><td class="n">০১</td><td class="l">ব্যবসায়িক ধারণা/উদ্যোগের সংক্ষিপ্ত বিবরণ<br>(২০০ শব্দের মধ্যে)</td><td><textarea class="tall" style="min-height:300px"></textarea></td></tr>
+    <tr class="s"><td class="n">০২</td><td class="l">সম্ভাব্য ক্রেতা</td><td><input type="text"></td></tr>
+    <tr><td class="n">০৩</td><td class="l">কত সময়ের মধ্যে ব্যবসায় শুরু করার পরিকল্পনা রয়েছে</td><td><input type="text"></td></tr>
+    <tr class="s"><td class="n">০৪</td><td class="l">ব্যবসার ধরন (উৎপাদন / সেবা / ব্যবসা) ও বিবরণ</td><td><textarea style="min-height:50px"></textarea></td></tr>
+    <tr><td class="n">০৫</td><td class="l">ব্যবসার সম্ভাব্য অবস্থান (গ্রাম/মহল্লা, ইউনিয়ন, উপজেলা)</td><td><textarea style="min-height:50px"></textarea></td></tr>
+    <tr class="s"><td class="n">০৬</td><td class="l">পণ্যের ধরন (আমদানির বিকল্প বা রপ্তানিযোগ্য পণ্য কিনা)</td><td><input type="text"></td></tr>
+    <tr><td class="n">০৭</td><td class="l">কাঁচামালের উৎস (প্রযোজ্য ক্ষেত্রে)</td><td><input type="text"></td></tr>
+    <tr class="s"><td class="n">০৮</td><td class="l">পণ্যের বাজার (স্থানীয়/আন্তর্জাতিক)</td><td><input type="text"></td></tr>
+    <tr><td class="n">০৯</td><td class="l">সম্ভাব্য বিক্রয়ের পরিমাণ (টাকায়)</td>
+      <td><div class="trio"><span>মাসিক</span><input type="number" min="0"><span>ত্রৈমাসিক</span><input type="number" min="0"><span>বার্ষিক</span><input type="number" min="0"></div></td></tr>
+    <tr class="s"><td class="n">১০</td><td class="l">সম্ভাব্য লাভ/মুনাফা (টাকায়)</td>
+      <td><div class="trio"><span>মাসিক</span><input type="number"><span>ত্রৈমাসিক</span><input type="number"><span>বার্ষিক</span><input type="number"></div></td></tr>
+  </table>
+  <footer>উদ্যোগ (UDYOG): উপজেলাভিত্তিক তরুণ উদ্যোক্তা অনুসন্ধান, চিহ্নিতকরণ ও অর্থায়ন কর্মসূচি | পৃষ্ঠা ৩</footer>
+</div>
+
+<!-- ============ পৃষ্ঠা ৪ ============ -->
+<div class="page">
+  <table>
+    <tr><td class="n">১১</td><td class="l">ব্যবসা পরিচালনার ক্ষেত্রে সম্ভাব্য সমস্যাসমূহ, ঝুঁকিসমূহ এবং ঝুঁকিসমূহ মোকাবেলায় পরিকল্পনা</td><td><textarea></textarea></td></tr>
+    <tr class="s"><td class="n">১২</td><td class="l">প্রথম বছরে সম্ভাব্য কর্মসংস্থান<br>(মোট ......... জন, তন্মধ্যে নারী ......... জন)</td>
+      <td><div class="trio"><span>মোট</span><input type="number" min="0" style="width:90px"><span>জন, তন্মধ্যে নারী</span><input type="number" min="0" style="width:90px"><span>জন</span></div></td></tr>
+    <tr><td class="n">১৩</td><td class="l">যে পণ্য/সেবা বিক্রয় করা হবে, বর্তমানে বাজারে তার অবস্থান কেমন<br>(কমপক্ষে ৩টি সম্ভাব্য প্রতিযোগী প্রতিষ্ঠানের তথ্যসহ)</td><td><textarea class="tall"></textarea></td></tr>
+  </table>
+
+  <div class="bar">পার্ট-৩: ব্যবসা সম্পর্কিত তথ্যাবলি (বর্তমানে কোন ব্যবসা পরিচালনা করে থাকলে)</div>
+  <table>
+    <tr><td class="n">০১</td><td class="l">ব্যবসা প্রতিষ্ঠানের নাম</td><td><input type="text"></td></tr>
+    <tr class="s"><td class="n">০২</td><td class="l">ব্যবসার ধরন (উৎপাদন / সেবা / ব্যবসা) ও বিবরণ</td><td><textarea style="min-height:50px"></textarea></td></tr>
+    <tr><td class="n">০৩</td><td class="l">ব্যবসা শুরুর তারিখ</td><td><input type="date"></td></tr>
+    <tr class="s"><td class="n">০৪</td><td class="l">ট্রেড লাইসেন্স আছে কিনা (হ্যাঁ/না) এবং থাকলে ইস্যুর তারিখ ও নম্বর</td><td><input type="text"></td></tr>
+    <tr><td class="n">০৫</td><td class="l">পণ্য/সেবার গড় বিক্রয়মূল্য (একক প্রতি)</td><td><input type="text"></td></tr>
+    <tr class="s"><td class="n">০৬</td><td class="l">বিক্রয়ের পরিমাণ (টাকায়)</td>
+      <td><div class="trio"><span>মাসিক</span><input type="number"><span>ত্রৈমাসিক</span><input type="number"><span>বার্ষিক</span><input type="number"></div></td></tr>
+    <tr><td class="n">০৭</td><td class="l">লাভ/মুনাফার পরিমাণ (টাকায়)</td>
+      <td><div class="trio"><span>মাসিক</span><input type="number"><span>ত্রৈমাসিক</span><input type="number"><span>বার্ষিক</span><input type="number"></div></td></tr>
+    <tr class="s"><td class="n">০৮</td><td class="l">কাঁচামাল ও ব্যবসা পরিচালনা বাবদ বিভিন্ন খাতে মাসিক সম্ভাব্য খরচ (টাকা)</td><td><textarea></textarea></td></tr>
+  </table>
+  <footer>উদ্যোগ (UDYOG): উপজেলাভিত্তিক তরুণ উদ্যোক্তা অনুসন্ধান, চিহ্নিতকরণ ও অর্থায়ন কর্মসূচি | পৃষ্ঠা ৪</footer>
+</div>
+
+<!-- ============ পৃষ্ঠা ৫ ============ -->
+<div class="page">
+  <table>
+    <tr><td class="n">০৯</td><td class="l">উদ্যোক্তা কীভাবে আলোচ্য ব্যবসায়ের সঙ্গে জড়িত হয়েছেন</td><td><textarea></textarea></td></tr>
+    <tr class="s"><td class="n">১০</td><td class="l">ব্যবসার সঙ্গে সম্পর্কিত মোট বিনিয়োগের পরিমাণ (টাকা)</td><td><input type="number" min="0"></td></tr>
+    <tr><td class="n">১১</td><td class="l">কাঁচামালের উৎস (প্রযোজ্য ক্ষেত্রে)</td><td><input type="text"></td></tr>
+    <tr class="s"><td class="n">১২</td><td class="l">পণ্য/সেবা বিপণন এলাকা</td><td><input type="text"></td></tr>
+    <tr><td class="n">১৩</td><td class="l">যে পণ্য/সেবা বিক্রয় করা হয়, বর্তমানে বাজারে তার অবস্থান<br>(কমপক্ষে ৩টি সম্ভাব্য প্রতিযোগী প্রতিষ্ঠানের তথ্যসহ)</td><td><textarea class="tall"></textarea></td></tr>
+    <tr class="s"><td class="n">১৪</td><td class="l">বিদ্যমান ব্যবসায় পরিচালনায় সমস্যাসমূহ, ঝুঁকিসমূহ এবং ঝুঁকিসমূহ মোকাবেলায় পরিকল্পনা</td><td><textarea class="tall"></textarea></td></tr>
+    <tr><td class="n">১৫</td><td class="l">কর্মীর সংখ্যা<br>(মোট ......... জন, তন্মধ্যে নারী ......... জন)</td>
+      <td><div class="trio"><span>মোট</span><input type="number" min="0" style="width:90px"><span>জন, তন্মধ্যে নারী</span><input type="number" min="0" style="width:90px"><span>জন</span></div></td></tr>
+    <tr class="s"><td class="n">১৬</td><td class="l">চলমান ব্যবসায় সম্প্রসারণসহ কর্মী বাড়ানোর কোনো পরিকল্পনা রয়েছে কিনা; থাকলে বিবরণ</td><td><textarea class="tall" style="min-height:220px"></textarea></td></tr>
+  </table>
+  <footer>উদ্যোগ (UDYOG): উপজেলাভিত্তিক তরুণ উদ্যোক্তা অনুসন্ধান, চিহ্নিতকরণ ও অর্থায়ন কর্মসূচি | পৃষ্ঠা ৫</footer>
+</div>
+
+<!-- ============ পৃষ্ঠা ৬ ============ -->
+<div class="page">
+  <div class="bar">পার্ট-৪: অর্থায়ন পরিকল্পনা ও ব্যয় বিভাজন</div>
+  <h3>ক. অর্থায়ন প্যাকেজ</h3>
+  <table>
+    <tr><th>বিবরণ</th><th>পরিমাণ (টাকা)</th></tr>
+    <tr class="s"><td>০১. প্রয়োজনীয় মোট মূলধনের পরিমাণ</td><td><input type="number" min="0" class="num"></td></tr>
+    <tr><td>০২. নিজস্ব বিনিয়োগ (যদি থাকে)</td><td><input type="number" min="0" class="num"></td></tr>
+    <tr class="s"><td>০৩. আবেদনকৃত অর্থায়নের পরিমাণ</td><td><input type="number" min="0" class="num"></td></tr>
+  </table>
+
+  <h3>খ. খাতভিত্তিক ব্যয় বিভাজন (প্রযোজ্য ঘরসমূহ পূরণীয়)</h3>
+  <table>
+    <tr><th style="width:50px">ক্রম</th><th>ব্যয়ের খাত</th><th>বিবরণ</th><th style="width:120px">মোট (টাকা)</th><th style="width:110px">অর্থের উৎস</th></tr>
+    <tr class="s"><td class="n">০১</td><td>যন্ত্রপাতি ও সরঞ্জাম ক্রয়</td><td><input type="text"></td><td><input type="number" class="num amt"></td><td><input type="text"></td></tr>
+    <tr><td class="n">০২</td><td>কাঁচামাল ও উপকরণ</td><td><input type="text"></td><td><input type="number" class="num amt"></td><td><input type="text"></td></tr>
+    <tr class="s"><td class="n">০৩</td><td>পরিচলন ব্যয়</td><td><input type="text"></td><td><input type="number" class="num amt"></td><td><input type="text"></td></tr>
+    <tr><td class="n">০৪</td><td>প্রোটোটাইপ/নমুনা উন্নয়ন</td><td><input type="text"></td><td><input type="number" class="num amt"></td><td><input type="text"></td></tr>
+    <tr class="s"><td class="n">০৫</td><td>প্যাকেজিং, লেবেল ও ব্র্যান্ডিং</td><td><input type="text"></td><td><input type="number" class="num amt"></td><td><input type="text"></td></tr>
+    <tr><td class="n">০৬</td><td>ব্যবসা নিবন্ধন, লাইসেন্স ও ছাড়পত্র</td><td><input type="text"></td><td><input type="number" class="num amt"></td><td><input type="text"></td></tr>
+    <tr class="s"><td class="n">০৭</td><td>বিপণন ও প্রচার</td><td><input type="text"></td><td><input type="number" class="num amt"></td><td><input type="text"></td></tr>
+    <tr><td class="n">০৮</td><td>কর্মীর মজুরি</td><td><input type="text"></td><td><input type="number" class="num amt"></td><td><input type="text"></td></tr>
+    <tr class="s"><td class="n">০৯</td><td>পরিবহন ও সরবরাহ</td><td><input type="text"></td><td><input type="number" class="num amt"></td><td><input type="text"></td></tr>
+    <tr><td class="n">১০</td><td>প্রযুক্তি, সফটওয়্যার ও ইন্টারনেট</td><td><input type="text"></td><td><input type="number" class="num amt"></td><td><input type="text"></td></tr>
+    <tr class="s"><td class="n">১১</td><td>প্রশিক্ষণ ও দক্ষতা উন্নয়ন</td><td><input type="text"></td><td><input type="number" class="num amt"></td><td><input type="text"></td></tr>
+    <tr><td class="n">১২</td><td>অন্যান্য (উল্লেখ করুন)</td><td><input type="text"></td><td><input type="number" class="num amt"></td><td><input type="text"></td></tr>
+    <tr class="total"><td colspan="2">সর্বমোট</td><td></td><td id="grand" class="num">০</td><td></td></tr>
+  </table>
+  <footer>উদ্যোগ (UDYOG): উপজেলাভিত্তিক তরুণ উদ্যোক্তা অনুসন্ধান, চিহ্নিতকরণ ও অর্থায়ন কর্মসূচি | পৃষ্ঠা ৬</footer>
+</div>
+
+<!-- ============ পৃষ্ঠা ৭ ============ -->
+<div class="page">
+  <div class="bar">পার্ট-৫: অন্যান্য তথ্য</div>
+  <table>
+    <tr><td class="n">০১</td><td class="l" style="width:50%">শারীরিক প্রতিবন্ধকতা আছে কিনা (হ্যাঁ/ না); থাকলে ধরন</td><td><input type="text"></td></tr>
+    <tr><td class="n">০২</td><td class="l" style="width:50%">ক্ষুদ্র নৃগোষ্ঠীভুক্ত কিনা (হ্যাঁ / না)</td><td><input type="text"></td></tr>
+    <tr><td class="n">০৩</td><td class="l" style="width:50%">অন্যান্য</td><td><input type="text"></td></tr>
+  </table>
+
+  <h3>ঘোষণা</h3>
+  <div class="decl">
+    <p>আমি এই মর্মে ঘোষণা করছি যে, উপরে প্রদত্ত সমস্ত তথ্য সত্য ও সঠিক। কোনো তথ্য অসত্য প্রমাণিত হলে আমার আবেদন/অনুমোদন যেকোনো পর্যায়ে বাতিলযোগ্য হবে।</p>
+    <p>আমি আরও ঘোষণা করছি যে, বাংলাদেশ ব্যাংকের এসএমইএসপিডি সার্কুলার নং-০৫, তারিখ: ১৩ সেপ্টেম্বর ২০২৬-এ উল্লিখিত সকল শর্তাবলি সম্পর্কে আমি অবগত আছি।</p>
+    <p>আমি অবগত আছি যে অনুমোদিত হলে, প্রাপ্ত ঋণ ও অনুদান নির্ধারিত খাতে ব্যবহৃত হলে এবং ঋণ অংশ সম্পূর্ণ ও যথাসময়ে পরিশোধ করলেই কেবল অনুদানের প্রাপ্ত অর্থ অনুদান হিসেবে বিবেচিত হবে এবং ঋণের সদ্ব্যবহার না করা হলে অনুদান অংশ ঋণে পরিণত হবে এবং সম্পূর্ণ অর্থ ঋণ হিসেবে গণ্য হয়ে আমি খেলাপি হিসেবে চিহ্নিত হব। আমি অঙ্গীকার করছি যে প্রদানকৃত অর্থ ব্যক্তিগত ভোগ, জমি বা যানবাহন ক্রয়ে ব্যবহার করব না; প্রতিটি ব্যয়ের ভাউচার সংরক্ষণ করব এবং চাহিদামতো প্রতিবেদন দাখিল করব।</p>
+  </div>
+  <div class="sign"><span>আবেদনকারীর স্বাক্ষর ও তারিখ:</span><input type="text"></div>
+
+  <h3 style="margin-top:28px">সংযুক্তি (আবেদনের সঙ্গে দাখিলযোগ্য)</h3>
+  <ul>
+    <li>জাতীয় পরিচয়পত্র/জন্মনিবন্ধন সনদের কপি;</li>
+    <li>সর্বশেষ শিক্ষাগত যোগ্যতার সনদের কপি; (যদি থাকে)</li>
+    <li>দক্ষতা উন্নয়ন/উদ্যোক্তা উন্নয়ন প্রশিক্ষণ সনদ (যদি থাকে);</li>
+    <li>ওয়ার্ড কমিশনার/কাউন্সিলর কর্তৃক প্রদত্ত নাগরিক সনদ।</li>
+  </ul>
+  <footer>উদ্যোগ (UDYOG): উপজেলাভিত্তিক তরুণ উদ্যোক্তা অনুসন্ধান, চিহ্নিতকরণ ও অর্থায়ন কর্মসূচি | পৃষ্ঠা ৭</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+  // সরাসরি PDF ডাউনলোড (প্রতিটি পৃষ্ঠা আলাদা A4 পৃষ্ঠায়)
+  async function downloadPDF(){
+    const btn = document.getElementById('pdfBtn');
+    const oldText = btn.textContent;
+    btn.disabled = true; btn.textContent = 'PDF তৈরি হচ্ছে...';
+    try {
+      if (document.fonts && document.fonts.ready) await document.fonts.ready;
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({ unit:'mm', format:'a4' });
+      const W = 210, H = 297, M = 8;
+      const pages = document.querySelectorAll('.page');
+      for (let i = 0; i < pages.length; i++) {
+        const canvas = await html2canvas(pages[i], { scale:2, backgroundColor:'#fff', useCORS:true });
+        let w = W - 2*M, h = canvas.height * w / canvas.width;
+        if (h > H - 2*M) { h = H - 2*M; w = canvas.width * h / canvas.height; }
+        if (i > 0) pdf.addPage();
+        pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', (W - w)/2, M, w, h);
+      }
+      pdf.save('udyog-application-form.pdf');
+    } catch (e) {
+      alert('PDF তৈরি করা যায়নি। ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।');
+    } finally {
+      btn.disabled = false; btn.textContent = oldText;
+    }
+  }
+
+  /* ঐচ্ছিক সহযোগিতা: নম্বর বদলাতে চাইলে এখানে */
+  const GIFT_NUMBER = '01777470798';
+  const GIFT_VIA = ['বিকাশ (bKash)', 'নগদ (Nagad)', 'রকেট (Rocket)'];
+  function renderGift(){
+    const box = document.getElementById('heartPay'); if (!box) return;
+    box.innerHTML = GIFT_VIA.map(n =>
+      '<div class="pay"><div><span class="nm">'+n+'</span><small>Send Money / পার্সোনাল</small></div>' +
+      '<div><span class="no">'+GIFT_NUMBER+'</span> <button class="copy" onclick="copyNo(this)">কপি</button></div></div>').join('');
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderGift); else renderGift();
+  function copyNo(btn){
+    (navigator.clipboard ? navigator.clipboard.writeText(GIFT_NUMBER) : Promise.reject())
+      .then(()=>{ btn.textContent='কপি হয়েছে'; setTimeout(()=>btn.textContent='কপি',1500); }).catch(()=>{});
+  }
+  function openHeart(){ document.getElementById('heartModal').classList.add('open'); }
+  function closeHeart(){ document.getElementById('heartModal').classList.remove('open'); }
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeHeart(); });
+  // সর্বমোট স্বয়ংক্রিয় হিসাব (বাংলা সংখ্যায় প্রদর্শন)
+  const bn = n => String(n).replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+  const amts = document.querySelectorAll('.amt');
+  function total(){
+    let s = 0; amts.forEach(i => s += parseFloat(i.value) || 0);
+    document.getElementById('grand').textContent = bn(s.toLocaleString('en-US'));
+  }
+  amts.forEach(i => i.addEventListener('input', total));
+</script>
+
+<!-- ============ ঐচ্ছিক সহযোগিতা ============ -->
+<button class="heart-fab" data-tip="ধন্যবাদ জানান" aria-label="ধন্যবাদ জানান" onclick="openHeart()">❤</button>
+<div class="modal-bg" id="heartModal" onclick="if(event.target===this)closeHeart()">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-head">
+      <button class="modal-x" onclick="closeHeart()" aria-label="বন্ধ করুন">&times;</button>
+      <div class="big">❤</div>
+      <h2>একটু ভালোবাসা জানাবেন?</h2>
+    </div>
+    <div class="modal-body">
+      <p class="free">এই ফরমটি সবার জন্য সম্পূর্ণ বিনামূল্যে। কোনো টাকা দিতে হবে না।</p>
+      <p>ওয়েবসাইটটি যদি আপনার কাজে এসে থাকে, আর যিনি এটি বানিয়েছেন তাঁকে একটু ধন্যবাদ জানাতে ইচ্ছা করে, তাহলে মন থেকে যা খুশি পাঠাতে পারেন। কেউ না দিলেও কোনো সমস্যা নেই, ফরমটি আপনি পুরোপুরি ব্যবহার করতে পারবেন।</p>
+      <div class="chips"><span>৳ ১০</span><span>৳ ৫০</span><span>৳ ১০০</span><span>৳ ২০০</span><span>যা খুশি</span></div>
+      <div id="heartPay"></div>
+      <div class="thanks">আপনার সদিচ্ছা আর দোয়াই আমার বড় প্রাপ্তি। অনেক ধন্যবাদ 🙏</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
